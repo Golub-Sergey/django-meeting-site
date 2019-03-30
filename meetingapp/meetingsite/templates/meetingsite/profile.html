@@ -1,0 +1,84 @@
+{% extends 'meetingsite/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="my-5">
+            <h3 class="text-center">{{ user.first_name }} {{ user.last_name }}</h3>
+            <div class="row">
+                <div class="col">
+            {% if user.img.first == None %}
+                <img src="{% static 'default_user/defaultUser.jpg' %}" class="img-responsive p-3" alt="">
+            {% else %}
+                <img src="{{ user.img.first.image.url }}" style="width:50%;">
+            {% endif %}
+                </div>
+                <div class="col">
+                    <h4 class="my-3">{{ user.age }} лет</h4>
+                    <h4 class="my-3">Пол: {{ user.gender }}</h4>
+                    {% if userprofile %}
+                        <h4 class="my-3">{{ userprofile.bio }}</h4>
+                    {% endif %}
+                </div>
+            </div>
+            <br>
+            {% if current_user == True %}
+            <div class="row">
+                <div class="col">    
+                    <a href="{% url 'update_user'  %}" class="btn btn-warning">Редактировать пользовательские данные</a>    
+                </div>
+            </div>
+            <br>
+            {% endif %}
+            <div class="row">
+                <div class="col">
+                    {% if current_user == True %}
+                        {% if userprofile %}
+                            <a href="{% url 'update_profile'  %}" class="btn btn-warning">Редактировать профиль</a>
+                        {% else %}
+                            <a href="{% url 'create_profile'  %}" class="btn btn-warning">Создать профиль</a>
+                        {% endif %}
+                    {% else %}
+                            <a href="#" class="btn btn-primary redirect-param" username="{{ user.username}}">Написать сообщение</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <hr>
+            {% if current_user == True %}
+                <form action="{% url 'profile' %}" method="POST" class="upload_form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }} 
+                    <input type="submit" value="Добавить фото" class="btn btn-success">
+                </form>
+             {% endif %}
+             <hr>
+
+            {% if userprofile.img.all %}
+            <div class="row">
+                {% for profileimg in userprofile.img.all  %}
+                <div class="col-md-4">    
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ profileimg.image.url }}" alt="Card image cap">
+                    </div>
+                </div>  
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    
+    </div>
+    <!-- dropzone js for uploading file -->
+    <script src="{% static "js/jquery.js" %}"></script>
+      <script>
+        $(document).ready(function(){
+          $('.redirect-param').on('click', function(e){
+            e.preventDefault()
+            var username = $(this).attr('username')
+            window.location.pathname = '/chat/' + username + '/';
+          })
+        });
+
+      </script>
+
+{% endblock content %}

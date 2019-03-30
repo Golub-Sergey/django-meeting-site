@@ -1,0 +1,94 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Base</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+      <a class="navbar-brand" href="{% url 'base' %}">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile' %}">Моя страница</a>
+          </li>
+          {% if not request.user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'registration' %}">Регистрация</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Войти</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'dialog_view' %}">Мои диалоги</a>
+            </li>
+          {% endif %}
+        </ul>
+        <form class="form-inline my-2 my-lg-0" method='GET' action='{% url "base" %}'>
+          {% csrf_token %}
+          {{ form.query_form_data }} 
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+        </form>
+      </div>
+    </nav>
+
+    {% block content %}
+    <div class="container padding">
+        <div class="row padding">
+          <div class="card-group">
+      {% for user in users %}
+        <div class="col">
+            
+                <div class="card" >
+                    {% if user.img.first == None %}
+                      <img src="{% static 'default_user/defaultUser.jpg' %}" class="card-img-top img-responsive p-3" alt="">
+                    {% else %}
+                      <img class="card-img-top" src="{{ user.img.first.image.url }}" style="width:50%;" alt="Card image cap">
+                    {% endif %}
+                      <div class="card-body">
+                      <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+                      <p class="card-text">{{ user.age }} лет</p>
+                      <p class="card-text">{{ user.gender }}</p>
+                      <a href="#" class="btn btn-primary redirect-param" username="{{ user.username}}">Написать сообщение</a>
+                      {% if user == request.user %}
+                        <a href="{% url 'profile' %}" class="btn btn-warning">Мой профиль</a>
+                      {% else %}
+                        <a href="{% url 'user_profile' user_profile=user.username %}" class="btn btn-warning">Смотреть профиль</a>
+                      {% endif %}
+                    </div>
+                  </div>
+              </div>
+            
+      {% endfor %}
+          </div>
+      </div>
+    </div>
+
+      <script src="{% static "js/jquery.js" %}"></script>
+      <script>
+        $(document).ready(function(){
+          $('.redirect-param').on('click', function(e){
+            e.preventDefault()
+            var username = $(this).attr('username')
+            window.location.pathname = '/chat/' + username + '/';
+          })
+        });
+
+      </script>
+
+
+    {% endblock %}
+
+</body>
+</html>

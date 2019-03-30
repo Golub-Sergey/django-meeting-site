@@ -1,0 +1,185 @@
+[
+{
+    "model": "meetingsite.customuser",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$120000$0cd0pUsP3LSr$JyBk7sxSTUPjcoULXi5NaWIha+Nwb0sZ2vqH9gQxRWs=",
+        "last_login": "2019-03-08T15:09:03.160Z",
+        "is_superuser": true,
+        "username": "s01s",
+        "first_name": "",
+        "last_name": "",
+        "email": "srs01srs@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-03-06T20:08:26.624Z",
+        "gender": "\u043c\u0443\u0436\u0447\u0438\u043d\u0430",
+        "age": 25,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "meetingsite.customuser",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$120000$KazikXYwaJFd$yDs87f71N28V8Dk7Ul072n9sJKa4WkAgFl6ctt8YTeo=",
+        "last_login": "2019-03-06T21:12:08.446Z",
+        "is_superuser": false,
+        "username": "02",
+        "first_name": "Wonder",
+        "last_name": "Women",
+        "email": "02@mail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2019-03-06T20:13:24.395Z",
+        "gender": "\u0436\u0435\u043d\u0449\u0438\u043d\u0430",
+        "age": 228,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "meetingsite.customuser",
+    "pk": 15,
+    "fields": {
+        "password": "pbkdf2_sha256$120000$9bjZwqTlXkgA$1vbroMpxLSWMWT8XXr963JQ3r093E5O7SBJQ61iWvRo=",
+        "last_login": "2019-03-08T16:58:29.640Z",
+        "is_superuser": false,
+        "username": "03",
+        "first_name": "Traiser",
+        "last_name": "Traiser",
+        "email": "traiser@mail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2019-03-07T22:09:18.811Z",
+        "gender": "\u0436\u0435\u043d\u0449\u0438\u043d\u0430",
+        "age": 18,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "meetingsite.userprofile",
+    "pk": 1,
+    "fields": {
+        "username": 1,
+        "bio": "about you me"
+    }
+},
+{
+    "model": "meetingsite.userprofile",
+    "pk": 2,
+    "fields": {
+        "username": 2,
+        "bio": "about me"
+    }
+},
+{
+    "model": "meetingsite.userprofile",
+    "pk": 9,
+    "fields": {
+        "username": 15,
+        "bio": "about me"
+    }
+},
+{
+    "model": "meetingsite.images",
+    "pk": 1,
+    "fields": {
+        "image": "user/Batman_Jim_Lee.jpg",
+        "object_id": 1,
+        "content_type": 2
+    }
+},
+{
+    "model": "meetingsite.images",
+    "pk": 2,
+    "fields": {
+        "image": "user/batman_Ce0Zcn0.jpg",
+        "object_id": 1,
+        "content_type": 4
+    }
+},
+{
+    "model": "meetingsite.images",
+    "pk": 3,
+    "fields": {
+        "image": "user/wmprofile2.jpg",
+        "object_id": 2,
+        "content_type": 2
+    }
+},
+{
+    "model": "meetingsite.images",
+    "pk": 4,
+    "fields": {
+        "image": "user/wmprofile.jpg",
+        "object_id": 2,
+        "content_type": 4
+    }
+},
+{
+    "model": "meetingsite.images",
+    "pk": 5,
+    "fields": {
+        "image": "user/batman-vs-superman-550x412.jpg",
+        "object_id": 1,
+        "content_type": 4
+    }
+},
+{
+    "model": "meetingsite.images",
+    "pk": 18,
+    "fields": {
+        "image": "user/bat3.jpg",
+        "object_id": 1,
+        "content_type": 4
+    }
+},
+{
+    "model": "meetingsite.images",
+    "pk": 19,
+    "fields": {
+        "image": "user/wmprofile3_7DB2UHS.jpg",
+        "object_id": 2,
+        "content_type": 4
+    }
+},
+{
+    "model": "meetingsite.images",
+    "pk": 30,
+    "fields": {
+        "image": "user/traicer_avatar_HDwYXJO.jpg",
+        "object_id": 15,
+        "content_type": 2
+    }
+},
+{
+    "model": "meetingsite.images",
+    "pk": 31,
+    "fields": {
+        "image": "user/traiser_1_xpa07L3.jpg",
+        "object_id": 9,
+        "content_type": 4
+    }
+},
+{
+    "model": "meetingsite.images",
+    "pk": 32,
+    "fields": {
+        "image": "user/traiser_2_JXcJdbr.jpg",
+        "object_id": 9,
+        "content_type": 4
+    }
+},
+{
+    "model": "meetingsite.images",
+    "pk": 34,
+    "fields": {
+        "image": "user/traiser_3_ZwlTyOu.jpg",
+        "object_id": 9,
+        "content_type": 4
+    }
+}
+]

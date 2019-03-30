@@ -1,0 +1,79 @@
+{% extends 'meetingsite/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="mr-auto my-5">
+            <h3 class="text-center">{{ receiver.first_name }} {{ receiver.last_name }}</h3>
+            
+            <ul id="chat-log" >
+                {% for group_message in group_messages %}
+                    <li>
+                        <h3>{{ group_message.username }}</h3>
+                        <p>{{ group_message.text }}</p>
+                    </li>
+                {% endfor %}
+            </ul><br/>
+            <!-- <textarea id="chat-log" cols="100" rows="20">
+                    {% for group_message in group_messages %}
+                    
+                        <h3>{{ group_message.username|safe }}</h3>
+                        <p>{{ group_message.text|safe }}</p>
+                    
+                {% endfor %}
+            </textarea><br/> -->
+            <input id="chat-message-input" type="text" size="100"/><br/>
+            <input type="submit" value="Отправить"  id="chat-message-submit" class="btn btn-success btn-block" size="100">
+        </div>
+    </div>
+
+    <script src="{% static "js/jquery.js" %}"></script>
+
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script>
+
+        var chatSocket = new WebSocket(
+            'ws://' + window.location.host + window.location.pathname);
+        
+        console.log(chatSocket)
+
+        chatSocket.onopen = function(event){
+            console.log('socket onopened', event)
+            $('#chat-message-submit').on('click', function(e){
+                e.preventDefault()
+                var messageInputeDom = $('#chat-message-input');
+                var message = messageInputeDom.val()
+                data = {
+                    'message': message
+                }
+                chatSocket.send(JSON.stringify(data))
+                messageInputeDom.val('') 
+            })
+        }
+
+        chatSocket.onmessage = function(event){
+            console.log(event)
+            var new_message = JSON.parse(event.data)
+            $('#chat-log').append(
+                 '<h3>' + new_message['username'] + '</h3>' 
+                + '<p>' + new_message['message']['message'] + '</p>' 
+            
+                 )
+        }
+
+        // chatSocket.onmessage = function(event){
+        //     console.log(event)
+        //     var new_message = JSON.parse(event.data)
+        //     $('#chat-log').append(
+        //          '\t' + new_message['username'] + '\t\t' 
+        //          + new_message['message']['message']
+            
+        //          )
+        // }
+
+        chatSocket.onclose = function(event){
+            console.log('socket closed', event)
+        }
+            
+    </script>
+{% endblock content%}

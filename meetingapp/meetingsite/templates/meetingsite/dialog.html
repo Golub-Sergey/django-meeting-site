@@ -1,0 +1,26 @@
+{% extends 'meetingsite/base.html' %}
+{% load static %}
+
+{% block content %}
+    
+    <div class="container">
+        <div class="mr-auto my-5">
+            {% for link in object_list %}
+                <a href="#" class="btn btn-primary redirect-param" group_name="{{ link.group_name }}">{{link.group_name}}</a>
+            {% endfor %}
+        </div>
+    </div>      
+
+    <script src="{% static "js/jquery.js" %}"></script>
+      <script>
+        $(document).ready(function(){
+          $('.redirect-param').on('click', function(e){
+            e.preventDefault()
+            var group_name = $(this).attr('group_name')
+            window.location.pathname = '/chat/' + group_name + '/';
+          })
+        });
+
+      </script>
+
+{% endblock content %}
